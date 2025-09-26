@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+  <h2>Welcome!</h2>
+  <p>If you see this, login worked ✅</p>
+  <button onclick="logout()">Logout</button>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBZImroIO2jbhTI5wCP9VbWjyL1yyCTm9c",
+      authDomain: "serendipity-data-2cba2.firebaseapp.com",
+      projectId: "serendipity-data-2cba2",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.logout = function () {
+      signOut(auth).then(() => {
+        localStorage.removeItem("userUID");
+        window.location.href = "index.html";
+      });
+    };
+  </script>
+</body>
+</html>
