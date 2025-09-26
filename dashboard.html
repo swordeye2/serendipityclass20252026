@@ -1,34 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard</title>
   <link rel="stylesheet" href="style.css">
-  <title>Dashboard</title>
 </head>
 <body>
-  <h2>Welcome!</h2>
-  <p>If you see this, login worked ✅</p>
+  <h2>Welcome to Your Report Card</h2>
+  <p id="userInfo"></p>
+
+  <div id="grades"></div>
+
   <button onclick="logout()">Logout</button>
 
   <script type="module">
+    // Import Firebase SDKs
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
+    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyBZImroIO2jbhTI5wCP9VbWjyL1yyCTm9c",
       authDomain: "serendipity-data-2cba2.firebaseapp.com",
-      projectId: "serendipity-data-2cba2",
+      projectId: "serendipity-data-2cba2"
     };
 
+    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
+    // Protect the dashboard
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        // If no user logged in, go back to login
+        window.location.href = "index.html";
+      } else {
+        document.getElementById("userInfo").innerText = `Logged in as: ${user.email}`;
+
+        // Example: fetch grades from Firestore
+        const docRef = doc(db, "grades", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const grades = docSnap.data();
+          let html = "<h3>Your Grades:</h3><table><tr><th>Subject</th><th>Grade</th></tr>";
+          for (const [subject, grade] of Object.entries(grades)) {
+            html += `<tr><td>${subject}</td><td>${grade}</td></tr>`;
+          }
+          html += "</table>";
+          document.getElementById("grades").innerHTML = html;
+        } else {
+          document.getElementById("grades").innerHTML = "<p>No grades found yet.</p>";
+        }
+      }
+    });
+
+    // Logout function
     window.logout = function () {
       signOut(auth).then(() => {
-        localStorage.removeItem("userUID");
         window.location.href = "index.html";
       });
     };
   </script>
 </body>
 </html>
-
