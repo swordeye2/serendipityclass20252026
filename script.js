@@ -34,45 +34,29 @@ setPersistence(auth, browserLocalPersistence)
     console.error("Persistence error:", error);
   });
 
-// Example login handler
+// ✅ Single login handler
 async function login(email, password) {
   try {
     const userCred = await signInWithEmailAndPassword(auth, email, password);
-    console.log("Logged in:", userCred.user.uid);
+    console.log("✅ Logged in:", userCred.user.uid);
 
-    // Fetch grades (optional)
+    // Fetch grades (optional test)
     const docRef = doc(db, "grades", userCred.user.uid);
     const docSnap = await getDoc(docRef);
-
     if (docSnap.exists()) {
-      console.log("Grades:", docSnap.data());
+      console.log("📊 Grades:", docSnap.data());
     } else {
-      console.log("No grades found.");
+      console.log("ℹ️ No grades found.");
     }
 
     // Redirect to dashboard.html
     window.location.href = "dashboard.html";
 
   } catch (err) {
-    console.error("Login failed:", err.message);
-  }
-}
-
-// Example login handler
-async function login(email, password) {
-  try {
-    const userCred = await signInWithEmailAndPassword(auth, email, password);
-    console.log("✅ Logged in:", userCred.user.uid);
-
-    // Redirect to dashboard.html
-    window.location.href = "dashboard.html";
-
-  } catch (err) {
     console.error("❌ Login failed:", err.message);
-    alert("Login failed: " + err.message); // show error to user
+    alert("Login failed: " + err.message); // show error to student
   }
 }
 
 // Make function available globally (so index.html can call it)
 window.login = login;
-
