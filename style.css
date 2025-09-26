@@ -1,44 +1,52 @@
-/* Use Google Fonts Roboto */
+/* Import Roboto font */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+  --green: #00703C;   /* De La Salle Green */
+  --gray: #6C757D;    /* Soft Rhino Gray */
+  --light-bg: #f8f9fa;
+}
 
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 20px;
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: var(--light-bg);
+  color: var(--gray);
 }
 
 /* Center login form */
 form {
-  max-width: 300px;
+  max-width: 320px;
   margin: 50px auto;
   padding: 20px;
-  border: 2px solid #ccc;
+  border: 2px solid var(--gray);
   border-radius: 8px;
   background: #fff;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* Inputs */
+/* Inputs and button */
 input, button {
   width: 100%;
   padding: 10px;
   margin: 8px 0;
   font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid var(--gray);
 }
 
 button {
-  background: #007bff;
+  background: var(--green);
   border: none;
   color: #fff;
   font-weight: 500;
   cursor: pointer;
-  border-radius: 4px;
+  transition: 0.3s;
 }
 
 button:hover {
-  background: #0056b3;
+  background: #005c31; /* darker green */
 }
 
 /* Table styling */
@@ -49,16 +57,20 @@ table {
   max-width: 800px;
   text-align: center;
   background: #fff;
-  border: 5px solid #333; /* outer border */
+  border: 5px solid var(--green); /* outer border */
 }
 
 th, td {
   padding: 12px;
-  border: 2px solid #333; /* inner border */
+  border: 2px solid var(--gray); /* inner border */
 }
 
 th {
-  background-color: #007bff;
+  background-color: var(--green);
   color: #fff;
   font-weight: 500;
+}
+
+td {
+  color: var(--gray);
 }
