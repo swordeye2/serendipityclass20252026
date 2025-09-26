@@ -58,5 +58,21 @@ async function login(email, password) {
   }
 }
 
+// Example login handler
+async function login(email, password) {
+  try {
+    const userCred = await signInWithEmailAndPassword(auth, email, password);
+    console.log("✅ Logged in:", userCred.user.uid);
+
+    // Redirect to dashboard.html
+    window.location.href = "dashboard.html";
+
+  } catch (err) {
+    console.error("❌ Login failed:", err.message);
+    alert("Login failed: " + err.message); // show error to user
+  }
+}
+
 // Make function available globally (so index.html can call it)
 window.login = login;
+
