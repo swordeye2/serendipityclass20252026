@@ -1,0 +1,64 @@
+/* Use Google Fonts Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Center login form */
+form {
+  max-width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Inputs */
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+button {
+  background: #007bff;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+/* Table styling */
+table {
+  border-collapse: collapse;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+  background: #fff;
+  border: 5px solid #333; /* outer border */
+}
+
+th, td {
+  padding: 12px;
+  border: 2px solid #333; /* inner border */
+}
+
+th {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: 500;
+}
